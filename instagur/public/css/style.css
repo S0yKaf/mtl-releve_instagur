@@ -1,0 +1,28 @@
+.like {
+  color: #f06595;
+  font-size: 23px;
+}
+
+.like-counter {
+  color: #f06595;
+}
+
+.fa-comment {
+  color: #209cee
+}
+
+.like:hover {
+  color: #e04220
+}
+
+.likes-bar {
+  padding: 10px 15px 0px 15px;
+}
+
+.send {
+  z-index: 100;
+}
+
+.card {
+  box-shadow: 2px 5px 13px;
+}

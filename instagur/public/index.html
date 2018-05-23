@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>instagur #!</title>
+  <base href="/">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+  <link rel="stylesheet" href="css/baseStyle.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body ng-app="myblt">
+  <div id="app">
+    <div class="navbar is-inline-flex is-transparent">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          <span class="is-large">Instagur #!</span>
+        </a>
+      </div>
+      <div class="navbar-item is-flex-touch">
+        <a class="button is-info is-outlined"><strong>Post</strong>&nbsp&nbsp<i class="fas fa-angle-up"></i></a>
+      </div>
+    </div>
+    <div class="columns body-columns">
+      <div class="column is-half is-offset-one-quarter">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="/uploads/bullet_cat.jpg" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="column card-content">
+            <div class="likes-bar level is-mobile">
+              <div class="level-left">
+                <p>
+                  <strong>32</strong> <i class="like-counter fas fa-heart"></i>
+                  &nbsp
+                  <strong>0</strong> <i class="fas fa-comment"></i>
+                </p>
+              </div>
+              <div class="level-right is-pulled-right">
+                <a class="like">
+                  <i class="far fa-heart"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="column content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+              <a>@bulmaio</a>.
+              <a href="#">#css</a>
+              <a href="#">#responsive</a>
+              <br>
+              <time datetime="2018-1-1">11:09 PM - 1 Jan 2018</time>
+            </div>
+          </div>
+          <hr/>
+          <div class="column is-paddingless">
+            <div class="column field-body">
+              <div class="field has-addons">
+                <p class="control is-expanded">
+                  <input class="input is-medium is-outlined" type="text" placeholder="Add a comment . . .">
+                </p>
+                <p class="control">
+                  <a class="button send is-outlined is-info is-medium is-centered">
+                    <i class="far fa-paper-plane"></i>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
