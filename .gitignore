@@ -1,3 +1,8 @@
+# app specific
+config/config.py
+database.sqlite
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

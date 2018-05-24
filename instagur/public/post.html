@@ -1,1 +1,66 @@
-posts
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>instagur #!</title>
+  <base href="/">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+  <link rel="stylesheet" href="css/baseStyle.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body ng-app="myblt">
+  <div id="post">
+    <div class="navbar is-inline-flex is-transparent">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <span class="">Instagur #!</span>
+        </a>
+      </div>
+      <div class="navbar-item is-flex-touch">
+        <span class="message is-medium has-text-info has-background-white"><strong>New post</strong>&nbsp&nbsp<i class="fas fa-angle-down"></i></span>
+      </div>
+    </div>
+
+    <div class="columns body-columns">
+      <div class="column is-half is-offset-one-quarter">
+        <div class="card">
+          <div class="card-image">
+            <div class="upload has-text-centered is-4by3 has-background-grey-lighter">
+              <div class=upload-box>
+                <p><strong class="has-text-info">Drag image here</strong></p>
+              </div>
+            </div>
+          </div>
+          <div class="column card-content">
+            <div class="likes-bar level is-mobile">
+              <div class="level-left">
+                <p>
+                  <strong>Content</strong>
+                </p>
+              </div>
+            </div>
+            <div class="column content">
+              <textarea class="textarea" v-model="post.content"></textarea>
+            </div>
+              <div class="level-right publish">
+                <button class="button is-info is-outlined is-pulled-right" @click="makePost"><strong>Publish #!</strong></button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <script src="js/post.js"></script>
+</body>
+</html>

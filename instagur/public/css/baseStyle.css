@@ -37,6 +37,33 @@
   width: 100%;
 }
 
+.upload {
+  display: flex;
+  height: 50vh;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.message {
+  padding: 1vh 2vh 1vh 2vh;
+  border-style: solid;
+  border-color:#209cee;
+  border-width: 0.2vh;
+  color: #209cee;
+}
+
+.upload-box {
+  display: flex;
+  border-style: solid;
+  border-color:#209cee;
+  border-width: 0.2vh;
+  color: #209cee;
+  text-align: center;
+  padding: 10vh;
+  box-shadow: 2px 5px 13px grey;
+}
+
 .card-footer .columns input {
     border: none;
     border-radius: 0;
