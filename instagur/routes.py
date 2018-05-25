@@ -1,6 +1,10 @@
 import os.path
+import json
 
 from instagur import app as app
+from instagur.models.Post import Post
+from instagur.models.Comment import Comment
+from instagur.database import db_session
 from flask import request, send_file, send_from_directory, jsonify, redirect
 
 basename = os.path.dirname(__file__)
@@ -57,7 +61,18 @@ def page_not_found(e):
 # Get a list of all posts
 @app.route('/post/all', methods=['GET'])
 def get_all_posts():
-    pass
+    posts = Post.query.all()
+    response = []
+    for post in posts:
+        response.append({
+            "id": post.id,
+            "filename": post.filename,
+            "story": post.story,
+            "data_type": post.data_type,
+            "likes": post.likes,
+            "created_at": post.created_at
+        })
+    return jsonify(response)
 
 
 # get a specific post
@@ -68,8 +83,19 @@ def get_post(id):
 
 # create a new post
 @app.route('/post', methods=['POST'])
-def add_poss():
-    pass
+def add_post():  # TODO REFACTOR THIS U FUK
+    file = request.files['file']
+    file_path = f'{basename}/public/uploads/{file.filename}'
+    story = request.form['content']
+
+    post = Post(file.filename, story, file.mimetype)
+    db_session.add(post)
+    db_session.commit()
+
+    file.stream.seek(0)
+    file.save(file_path)
+
+    return f'{file.filename} uploaded succesfully!'
 
 
 # add a like to a post

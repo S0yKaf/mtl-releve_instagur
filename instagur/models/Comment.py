@@ -1,7 +1,7 @@
 from sqlalchemy import Table, Column, Integer, String
 from sqlalchemy.orm import mapper
 
-from database import metadata, db_session
+from instagur.database import metadata, db_session
 
 
 class Comment:
@@ -16,11 +16,11 @@ class Comment:
         return '<User %r>' % (self.username)
 
 
-posts = Table('urls', metadata,
-              Column('id', Integer, primary_key=True),
-              Column('post_id', Integer, unique=False),
-              Column('author', String(255), unique=False),
-              Column('comment', String(255), unique=False)
-              )
+comments = Table('comment', metadata,
+                 Column('id', Integer, primary_key=True),
+                 Column('post_id', Integer, unique=False),
+                 Column('author', String(255), unique=False),
+                 Column('comment', String(255), unique=False)
+                 )
 
-mapper(Post, posts)
+mapper(Comment, comments)

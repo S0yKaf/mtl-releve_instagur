@@ -16,7 +16,7 @@
 </head>
 
 <body ng-app="myblt">
-  <div id="app">
+  <div id="index">
     <div class="navbar is-inline-flex is-transparent">
       <div class="navbar-brand">
         <a class="navbar-item">
@@ -27,19 +27,19 @@
         <a class="button is-info is-outlined" href="/post"><strong>Post</strong>&nbsp&nbsp<i class="fas fa-angle-up"></i></a>
       </div>
     </div>
-    <div class="columns body-columns">
+    <div class="columns body-columns" v-for="post in posts">
       <div class="column is-half is-offset-one-quarter">
         <div class="card">
           <div class="card-image">
             <figure class="image is-4by3">
-              <img src="/uploads/bullet_cat.jpg" alt="Placeholder image">
+              <img :src="'/uploads/' + post.filename" alt="Placeholder image">
             </figure>
           </div>
           <div class="column card-content">
             <div class="likes-bar level is-mobile">
               <div class="level-left">
                 <p>
-                  <strong>32</strong> <i class="like-counter fas fa-heart"></i>
+                  <strong>{{post.likes}}</strong> <i class="like-counter fas fa-heart"></i>
                   &nbsp
                   <strong>0</strong> <i class="fas fa-comment"></i>
                 </p>
@@ -52,12 +52,9 @@
             </div>
 
             <div class="column content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-              <a>@bulmaio</a>.
-              <a href="#">#css</a>
-              <a href="#">#responsive</a>
+              {{post.story}}
               <br>
-              <time datetime="2018-1-1">11:09 PM - 1 Jan 2018</time>
+              <time :datetime="post.created_at">{{post.created_at}}</time>
             </div>
           </div>
           <hr/>

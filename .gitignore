@@ -1,5 +1,6 @@
 # app specific
 config/config.py
+instagur/public/uploads/
 database.sqlite
 
 

@@ -1,7 +1,9 @@
-from sqlalchemy import Table, Column, Integer, String
+from datetime import datetime
+
+from sqlalchemy import Table, Column, Integer, String, DateTime
 from sqlalchemy.orm import mapper
 
-from database import metadata, db_session
+from instagur.database import metadata, db_session
 
 
 class Post:
@@ -16,12 +18,13 @@ class Post:
         return f'<Post {self.filename}>'
 
 
-posts = Table('urls', metadata,
+posts = Table('post', metadata,
               Column('id', Integer, primary_key=True),
               Column('filename', String(2048), unique=True),
               Column('story', String, unique=False),
               Column('data_type', String(7), unique=False),
-              Column('likes', Integer, unique=False)
+              Column('likes', Integer, default=0),
+              Column('created_at', DateTime, default=datetime.now())
               )
 
 mapper(Post, posts)

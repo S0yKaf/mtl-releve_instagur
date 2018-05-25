@@ -24,7 +24,7 @@
         </a>
       </div>
       <div class="navbar-item is-flex-touch">
-        <span class="message is-medium has-text-info has-background-white"><strong>New post</strong>&nbsp&nbsp<i class="fas fa-angle-down"></i></span>
+        <span class="button is-medium is-info" @click="addUpload"><strong>Upload</strong>&nbsp&nbsp<i class="fas fa-angle-down"></i></span>
       </div>
     </div>
 
@@ -32,10 +32,11 @@
       <div class="column is-half is-offset-one-quarter">
         <div class="card">
           <div class="card-image">
-            <div class="upload has-text-centered is-4by3 has-background-grey-lighter">
-              <div class=upload-box>
-                <p><strong class="has-text-info">Drag image here</strong></p>
-              </div>
+            <figure class="image is-4by3" v-if="post.image">
+              <img v-bind:src="placeholder" alt="Placeholder"/>
+            </figure>
+            <div class="upload has-text-centered is-4by3 has-background-grey-lighter" v-if="!post.image">
+              <p><strong class="has-text-info">Your Image Here</strong></p>
             </div>
           </div>
           <div class="column card-content">
@@ -47,6 +48,7 @@
               </div>
             </div>
             <div class="column content">
+              <input id="upload" type="file" @change="processUpload($event)" hidden />
               <textarea class="textarea" v-model="post.content"></textarea>
             </div>
               <div class="level-right publish">
