@@ -9,6 +9,7 @@ from flask import request, send_file, send_from_directory, jsonify, redirect
 
 basename = os.path.dirname(__file__)
 
+
 @app.route('/', methods=['GET'])
 def index():
     return send_file('public/index.html')
@@ -41,7 +42,8 @@ def css(filename):
 
 @app.route('/uploads/<filename>', methods=['GET'])
 def uploads(filename):
-    if filename and not os.path.exists(f'{basename}/public/uploads/{filename}'):
+    if filename and \
+       not os.path.exists(f'{basename}/public/uploads/{filename}'):
         return send_file('public/404.html'), 404
 
     return send_from_directory('public/uploads/', filename)
@@ -58,6 +60,7 @@ def page_not_found(e):
 
 # POST ROUTES
 
+
 # Get a list of all posts
 @app.route('/post/all', methods=['GET'])
 def get_all_posts():
@@ -70,9 +73,22 @@ def get_all_posts():
             "story": post.story,
             "data_type": post.data_type,
             "likes": post.likes,
-            "created_at": post.created_at
+            "created_at": post.created_at,
+            "comments": get_post_comments(post.id)
         })
     return jsonify(response)
+
+
+def get_post_comments(id):
+    comments = Comment.query.filter(Comment.post_id == id).all()
+    response = []
+    for comment in comments:
+        response.append({
+            "id": comment.id,
+            "author": comment.author,
+            "comment": comment.comment
+        })
+    return response
 
 
 # get a specific post
@@ -98,13 +114,46 @@ def add_post():  # TODO REFACTOR THIS U FUK
     return f'{file.filename} uploaded succesfully!'
 
 
-# add a like to a post
-@app.route('/post/<id>/like', methods=['GET'])
-def like(id):
+@app.route('/post/<id>', methods=['DELETE'])
+def delete_post(id):
     pass
+
+
+# add a like to a post
+@app.route('/post/<id>/like', methods=['POST'])
+def like(id):
+    post = Post.query.filter(Post.id == id).first()
+    if not post:
+        return (f'no post with id {id}', 500)
+
+    post.likes += 1
+    db_session.commit()
+    return 'liked!'
+
+
+@app.route('/post/<id>/comments', methods=['GET'])
+def get_comments(id):
+    comments = Comment.query.filter(Comment.post_id == id).all()
+    response = []
+    for comment in comments:
+        response.append({
+            "id": comment.id,
+            "post_id": comment.post_id,
+            "author": comment.author,
+            "comment": comment.comment
+        })
+    return jsonify(response)
 
 
 # add a comment to a post
-@app.route('/post/comment', methods=['POST'])
-def comment():
-    pass
+@app.route('/post/<id>/comment', methods=['POST'])
+def comment(id):
+    req = request.get_json()
+    print(req)
+    if 'comment' not in req:
+        return jsonify({'error': 'Bad request'}), 400
+
+    comment = Comment(id, 'anon', req['comment'])
+    db_session.add(comment)
+    db_session.commit()
+    return 'posted'

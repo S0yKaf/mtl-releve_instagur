@@ -45,7 +45,7 @@
                 </p>
               </div>
               <div class="level-right is-pulled-right">
-                <a class="like">
+                <a class="like" @click="like(post)">
                   <i class="far fa-heart"></i>
                 </a>
               </div>
@@ -57,15 +57,21 @@
               <time :datetime="post.created_at">{{post.created_at}}</time>
             </div>
           </div>
+          <div class="comment column" v-for="comment in post.comments">
+            <strong>{{comment.author}}: </strong> {{comment.comment}}
+          </div>
           <hr/>
           <div class="column is-paddingless">
             <div class="column field-body">
               <div class="field has-addons">
                 <p class="control is-expanded">
-                  <input class="input is-medium is-outlined" type="text" placeholder="Add a comment . . .">
+                  <input class="input is-medium is-outlined"
+                  type="text" placeholder="Add a comment . . ."
+                  v-model="userComment">
                 </p>
                 <p class="control">
-                  <a class="button send is-outlined is-info is-medium is-centered">
+                  <a class="button send is-outlined is-info is-medium is-centered"
+                     @click="comment(post.id, userComment)">
                     <i class="far fa-paper-plane"></i>
                   </a>
                 </p>
