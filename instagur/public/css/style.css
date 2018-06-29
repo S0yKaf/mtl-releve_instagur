@@ -8,21 +8,64 @@
 }
 
 .fa-comment {
-  color: #209cee
+  color: #209cee;
 }
 
 .like:hover {
-  color: #e04220
+  color: #e04220;
 }
 
 .likes-bar {
   padding: 10px 15px 0px 15px;
+  color: #DF660F;
 }
 
 .send {
-  z-index: 100;
+  z-index: 1000
+  color: #e04220;
 }
 
 .card {
   box-shadow: 2px 5px 13px;
+}
+
+.instagram{
+  color: #e04220;
+}
+
+.index{
+  color: #DF660F;
+}
+
+.level-left{
+ color: #DF660F;
+}
+
+.control{
+  color: #DF660F;
+}
+
+.about {
+  padding-top: 200px;
+  margin-left: 600px;
+  margin-right: 600px;
+}
+
+.photo-left {
+  float: left;
+}
+
+.photo-right {
+  float: right;
+}
+
+.mot_de_passe {
+  float: right;
+  margin-left: 400px;
+}
+
+.commenditaire {
+  margin-top: 300px;
+  margin-left: 800px;
+  margin-right: 800px;
 }

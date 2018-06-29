@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>instagur #!</title>
+  <title>Insta</title>
   <base href="/">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
@@ -20,14 +20,19 @@
     <div class="navbar is-inline-flex is-transparent">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
-          <span class="">Instagur #!</span>
+          <span class="button is-medium is-info is-outlined">Insta &nbsp&nbsp<i class="fas fa-angle-up"></i></span>
         </a>
       </div>
       <div class="navbar-item is-flex-touch">
-        <span class="button is-medium is-info" @click="addUpload"><strong>Upload</strong>&nbsp&nbsp<i class="fas fa-angle-down"></i></span>
+        <a class="button is-medium is-info is-outlined" href="/post"><strong>Post</strong>&nbsp&nbsp<i class="fas fa-angle-down"></i></a>
+      </div>
+      <div class="navbar-item is-flex-touch">
+        <span class=" button is-medium is-info is-outlined"><a href="/about"><strong>A propos de nous</strong>&nbsp&nbsp<i class="fas fa-angle-up"></i></a></span>
+      </div>
+      <div class="navbar-item is-flex-touch">
+        <span class="button is-medium is-info" @click="addUpload"><strong>Televerser</strong>&nbsp&nbsp<i class="fas fa-upload"></i></span>
       </div>
     </div>
-
     <div class="columns body-columns">
       <div class="column is-half is-offset-one-quarter">
         <div class="card">
@@ -36,23 +41,23 @@
               <img v-bind:src="placeholder" alt="Placeholder"/>
             </figure>
             <div class="upload has-text-centered is-4by3 has-background-grey-lighter" v-if="!post.image">
-              <p><strong class="has-text-info">Your Image Here</strong></p>
+              <p><strong class="has-text-info">Palcer votre image ici</strong></p>
             </div>
           </div>
-          <div class="column card-content">
+          <div class="column card-contenu">
             <div class="likes-bar level is-mobile">
               <div class="level-left">
                 <p>
-                  <strong>Content</strong>
+                  <strong>Contenu</strong>
                 </p>
               </div>
             </div>
-            <div class="column content">
+            <div class="column contenu">
               <input id="upload" type="file" @change="processUpload($event)" hidden />
               <textarea class="textarea" v-model="post.content"></textarea>
             </div>
-              <div class="level-right publish">
-                <button class="button is-info is-outlined is-pulled-right" @click="makePost"><strong>Publish #!</strong></button>
+              <div class="level-right publier">
+                <button class="button is-info is-outlined is-pulled-right" @click="makePost"><strong>Publier</strong></button>
               </div>
           </div>
         </div>

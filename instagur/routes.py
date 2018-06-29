@@ -49,9 +49,10 @@ def uploads(filename):
     return send_from_directory('public/uploads/', filename)
 
 
-@app.route('/login', methods=['POST'])
-def login():
-    pass
+# @app.route('/disconect', methods=['POST'])
+# def disconect():
+#     if app.config['SECRET_KEY'] != secret:
+
 
 
 @app.errorhandler(404)
@@ -64,7 +65,8 @@ def page_not_found(e):
 # Get a list of all posts
 @app.route('/post/all', methods=['GET'])
 def get_all_posts():
-    posts = Post.query.all()
+    posts = Post.query.filter(Post.is_deleted == False).all() # filter pour pas aller chercher les is_deleted
+
     response = []
     for post in posts:
         response.append({
@@ -91,12 +93,6 @@ def get_post_comments(id):
     return response
 
 
-# get a specific post
-@app.route('/post/<id>', methods=['GET'])
-def get_post(id):
-    pass
-
-
 # create a new post
 @app.route('/post', methods=['POST'])
 def add_post():  # TODO REFACTOR THIS U FUK
@@ -114,9 +110,36 @@ def add_post():  # TODO REFACTOR THIS U FUK
     return f'{file.filename} uploaded succesfully!'
 
 
-@app.route('/post/<id>', methods=['DELETE'])
-def delete_post(id):
-    pass
+@app.route('/post/<id>/<secret>', methods=['GET'])
+def delete_post(id, secret):
+    post = Post.query.filter(Post.id == id).first()
+
+    if not post:
+        print("ereure delete Poste apres code")
+        return (f'no post with id {id}', 500)
+
+    if app.config['SECRET_KEY'] == secret:
+
+        post.is_deleted = True
+        db_session.add(post)
+        db_session.commit()
+        print("delete Post")
+
+    return "post Deleted!"
+
+
+@app.route('/comment/<id>/<secret>', methods=['GET'])
+def delete_comment(id, secret):
+    comment = Comment.query.filter(Comment.id == id).first()
+    if not comment:
+       return (f'no comment with id {id}', 500)
+
+    if app.config['SECRET_KEY'] == secret:
+        db_session.delete(comment)
+
+    db_session.commit()
+    return "comment Deleted!"
+
 
 
 # add a like to a post
@@ -129,6 +152,17 @@ def like(id):
     post.likes += 1
     db_session.commit()
     return 'liked!'
+
+# # add a comment to a post
+# @app.route('/post/<id>/comments', methods=['POST'])
+# def comment(id):
+#     post = Post.query.filter(Post.id == id).first()
+#     if not post:
+#         return (f'no post with id {id}', 500)
+#
+#     post.coments += 1
+#     db_session.commit()
+#     return 'comment!'
 
 
 @app.route('/post/<id>/comments', methods=['GET'])
